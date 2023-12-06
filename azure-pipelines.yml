@@ -13,8 +13,19 @@ jobs:
     displayName: 'Clone Repository and Change Directory'
 
   - script: |
+      # Install Conda
+      wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+      bash miniconda.sh -b -p $HOME/miniconda
+      export PATH="$HOME/miniconda/bin:$PATH"
+      hash -r
+      conda config --set always_yes yes --set changeps1 no --set show_channel_urls yes
+      conda update -q conda
+
+      # Create and activate Conda environment
       conda create -n sadtalker python=3.8
       conda activate sadtalker
+
+      # Install other dependencies
       pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
       conda install ffmpeg
       pip install -r requirements.txt
