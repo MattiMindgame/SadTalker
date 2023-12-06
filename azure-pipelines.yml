@@ -1,0 +1,27 @@
+trigger:
+- main  # Or the branch you want to trigger on
+
+jobs:
+- job: SetupSadTalker
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - script: |
+      git clone https://github.com/Winfredy/SadTalker.git
+      cd SadTalker
+  displayName: 'Clone Repository and Change Directory'
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.8'
+      addToPath: true
+    displayName: 'Use Python 3.8'
+
+  - script: |
+      conda create -n sadtalker python=3.8
+      conda activate sadtalker
+      pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
+      conda install ffmpeg
+      pip install -r requirements.txt
+  displayName: 'Setup Conda Environment and Install Dependencies'
