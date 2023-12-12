@@ -30,10 +30,9 @@ jobs:
       conda install ffmpeg
       pip install -r requirements.txt
     displayName: 'Setup Conda Environment and Install Dependencies'
-    
+      
   - task: PublishBuildArtifacts@1
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'SadTalker'
-    publishLocation: 'Container'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'SadTalker'
+      publishLocation: 'Container'
