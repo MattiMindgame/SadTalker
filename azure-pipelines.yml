@@ -31,6 +31,10 @@ jobs:
       pip install -r requirements.txt
     displayName: 'Setup Conda Environment and Install Dependencies'
       
+  - task: CopyFiles@2
+    inputs:
+      targetFolder: '$(Build.ArtifactStagingDirectory)'
+
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
