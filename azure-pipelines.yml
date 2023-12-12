@@ -8,8 +8,6 @@ jobs:
 
   steps:
   - script: |
-      mkdir SadTalkerWrapper
-      cd SadTalkerWrapper
       git clone https://github.com/MattiMindgame/SadTalker.git
       cd SadTalker
     displayName: 'Clone Repository and Change Directory'
